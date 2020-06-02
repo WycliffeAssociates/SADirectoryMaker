@@ -2,9 +2,9 @@ import java.lang.IllegalArgumentException
 
 class DirectoryLogic {
 
-    private val supportedExtensions = arrayOf("wav", "mp3", "jpeg", "tr")
+    private val supportedExtensions = arrayOf("wav", "mp3", "jpeg", "jpg", "tr")
     private val supportedContainers = arrayOf("tr")
-    private val compressedTypes = arrayOf("mp3", "jpeg")
+    private val compressedTypes = arrayOf("mp3", "jpeg", "jpg")
     private val groupings = arrayOf("book", "chapter", "verse", "chunk")
 
     @Throws(IllegalArgumentException::class)
