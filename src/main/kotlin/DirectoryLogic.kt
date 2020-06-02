@@ -5,6 +5,7 @@ class DirectoryLogic {
     private val supportedExtensions = arrayOf("wav", "mp3", "jpeg", "tr")
     private val supportedContainers = arrayOf("tr")
     private val compressedTypes = arrayOf("mp3", "jpeg")
+    private val groupings = arrayOf("book", "chapter", "verse", "chunk")
 
     @Throws(IllegalArgumentException::class)
     fun buildFullFilePath(
@@ -43,6 +44,9 @@ class DirectoryLogic {
             else if(mediaQuality == "hi" || mediaQuality == "low") path += "$mediaQuality/"
             else throw IllegalArgumentException("Media Quality is invalid")
         }
+
+        if(!groupings.contains(group)) throw IllegalArgumentException("Group is not supported")
+        path += "$group/"
 
         return path
 
