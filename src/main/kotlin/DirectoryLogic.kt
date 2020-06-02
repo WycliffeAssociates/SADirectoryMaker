@@ -20,6 +20,11 @@ class DirectoryLogic {
         if(languageCode.isBlank()) throw IllegalArgumentException("Language code is empty")
         path += "$languageCode/"
 
+        if(dublinCoreId.isBlank()) throw IllegalArgumentException("Dublin Code ID is empty")
+        path += "$dublinCoreId/"
+
+        
+
         return ""
 
     }
