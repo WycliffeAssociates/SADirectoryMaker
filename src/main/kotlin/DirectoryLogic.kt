@@ -23,6 +23,9 @@ class DirectoryLogic {
         if(dublinCoreId.isBlank()) throw IllegalArgumentException("Dublin Code ID is empty")
         path += "$dublinCoreId/"
 
+        if(!projectId.isBlank()) path += "$projectId/"
+        path += "CONTENTS/"
+
         
 
         return ""
