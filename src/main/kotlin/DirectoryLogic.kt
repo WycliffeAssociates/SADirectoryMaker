@@ -3,6 +3,7 @@ import java.lang.IllegalArgumentException
 class DirectoryLogic {
 
     private val supportedExtensions = arrayOf("wav", "mp3", "jpeg", "tr")
+    private val supportedContainers = arrayOf("tr")
 
     @Throws(IllegalArgumentException::class)
     fun buildFullFilePath(
@@ -15,6 +16,8 @@ class DirectoryLogic {
         mediaQuality: String = "hi"
     ): String {
 
+        val fileExt = inputFilePath.split("/").last().split('.').last()
+
         var path = ""
 
         if(languageCode.isBlank()) throw IllegalArgumentException("Language code is empty")
@@ -26,9 +29,13 @@ class DirectoryLogic {
         if(!projectId.isBlank()) path += "$projectId/"
         path += "CONTENTS/"
 
-        
+        path += "$fileExt/"
+        if(supportedContainers.contains(fileExt)) {
+            if(mediaExtension.isBlank()) throw IllegalArgumentException("Media Extension is empty")
+            path += "$mediaExtension/"
+        }
 
-        return ""
+        return path
 
     }
 
