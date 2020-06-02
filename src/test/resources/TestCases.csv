@@ -1,0 +1,14 @@
+fileName,languageCode,dublincoreId,projectId,mediaExtension,mediaQuality,group,expectedResult
+/home/tony_and_dj/en_ulb_gen_chunk.tr,en,ulb,gen,mp3,hi,chunk,en/ulb/gen/CONTENTS/tr/mp3/hi/chunk/en_ulb_gen_chunk.tr
+/home/tony_and_dj/aa_ulb_gen_chunk.tr,aa,ulb,gen,mp3,,chunk,aa/ulb/gen/CONTENTS/tr/mp3/hi/chunk/aa_ulb_gen_chunk.tr
+/home/tony_and_dj/en_ulb_gen_verse.mp3,en,ulb,gen,,,verse,en/ulb/gen/CONTENTS/mp3/hi/verse/en_ulb_gen_verse.mp3
+/home/tony_and_dj/en_ulb_chunk.mp3,en,ulb,,,,chunk,en/ulb/CONTENTS/mp3/hi/chunk/en_ulb_chunk.mp3
+/home/tony_and_dj/fr_ulb_gen_chapter.mp3,fr,ulb,gen,,low,chapter,fr/ulb/gen/CONTENTS/mp3/low/chapter/fr_ulb_gen_chapter.mp3
+/home/tony_and_dj/ja_ulb_mrk_book.wav,ja,ulb,mrk,,,book,ja/ulb/mrk/CONTENTS/wav/book/ja_ulb_mrk_book.wav
+/home/tony_and_dj/vn_ulb_exo_chapter.jpg,vn,ulb,exo,,low,chapter,vn/ulb/exo/CONTENTS/jpg/low/chapter/vn_ulb_exo_chapter.jpg
+/home/tony_and_dj/zh_yml_chunk.wav,zh,yml,,,,chunk,zh/yml/CONTENTS/wav/chunk/zh_yml_chunk.wav
+/home/tony_and_dj/en_ulb_gen_chunk.mp3,en,ulb,gen,,,,IllegalArgumentException
+/home/tony_and_dj/en_ulb_gen_chunk.mp3,en,ulb,gen,,low,chnk,IllegalArgumentException
+/home/tony_and_dj/en_ulb_gen_chunk.mp3,,ulb,gen,,,chunk,IllegalArgumentException
+/home/tony_and_dj/fr_ulb_exo_verse.mp3,fr,ulb,exo,,medium,verse,IllegalArgumentException
+/home/tony_and_dj/en_ulb_gen_chunk.mp3,,,,,,,IllegalArgumentException
