@@ -4,6 +4,7 @@ class DirectoryLogic {
 
     private val supportedExtensions = arrayOf("wav", "mp3", "jpeg", "tr")
 
+    @Throws(IllegalArgumentException::class)
     fun buildFullFilePath(
         inputFilePath: String,
         languageCode: String,
@@ -13,6 +14,11 @@ class DirectoryLogic {
         mediaExtension: String = "",
         mediaQuality: String = "hi"
     ): String {
+
+        var path = ""
+
+        if(languageCode.isBlank()) throw IllegalArgumentException("Language code is empty")
+        path += "$languageCode/"
 
         return ""
 
@@ -24,7 +30,7 @@ class DirectoryLogic {
         val extensionsString = supportedExtensions.joinToString(separator = "|", prefix = "(", postfix = ")")
         val pattern = Regex("[a-z,0-9,_,~,\\.,\\-,/,\\\\]*.${extensionsString}", RegexOption.IGNORE_CASE)
 
-        if(fullPath.isBlank() || !fullPath.matches(pattern)) throw IllegalArgumentException("$fullPath is invalid")
+        if (fullPath.isBlank() || !fullPath.matches(pattern)) throw IllegalArgumentException("$fullPath is invalid")
 
         return fullPath.split('/').last()
 
