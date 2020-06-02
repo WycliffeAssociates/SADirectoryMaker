@@ -48,6 +48,8 @@ class DirectoryLogic {
         if(!groupings.contains(group)) throw IllegalArgumentException("Group is not supported")
         path += "$group/"
 
+        path += getFileNameFromFullPath(inputFilePath)
+
         return path
 
     }
