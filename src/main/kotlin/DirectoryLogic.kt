@@ -4,6 +4,7 @@ class DirectoryLogic {
 
     private val supportedExtensions = arrayOf("wav", "mp3", "jpeg", "tr")
     private val supportedContainers = arrayOf("tr")
+    private val compressedTypes = arrayOf("mp3", "jpeg")
 
     @Throws(IllegalArgumentException::class)
     fun buildFullFilePath(
@@ -13,7 +14,7 @@ class DirectoryLogic {
         group: String,
         projectId: String = "",
         mediaExtension: String = "",
-        mediaQuality: String = "hi"
+        mediaQuality: String = ""
     ): String {
 
         val fileExt = inputFilePath.split("/").last().split('.').last()
@@ -32,7 +33,15 @@ class DirectoryLogic {
         path += "$fileExt/"
         if(supportedContainers.contains(fileExt)) {
             if(mediaExtension.isBlank()) throw IllegalArgumentException("Media Extension is empty")
+            if(!supportedExtensions.contains(mediaExtension)) throw IllegalArgumentException("Media Extension is not supported")
             path += "$mediaExtension/"
+        }
+
+        // if the file is a compressed type
+        if(compressedTypes.contains(fileExt) || compressedTypes.contains(mediaExtension)) {
+            if(mediaQuality.isBlank()) path += "hi/"
+            else if(mediaQuality == "hi" || mediaQuality == "low") path += "$mediaQuality/"
+            else throw IllegalArgumentException("Media Quality is invalid")
         }
 
         return path
