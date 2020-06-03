@@ -1,37 +1,61 @@
 import java.io.File
 import java.lang.IllegalArgumentException
 
-class DirectoryLogic {
+enum class SupportedExtensions(val ext: String) {
+    WAV("wav"),
+    MP3("mp3"),
+    JPEG("jpeg"),
+    JPG("jpg"),
+    TR("tr");
 
-    private val supportedExtensions = arrayOf("wav", "mp3", "jpeg", "jpg", "tr")
-    private val supportedContainers = arrayOf("tr")
-    private val compressedTypes = arrayOf("mp3", "jpeg", "jpg")
-    private val groupings = arrayOf("book", "chapter", "verse", "chunk")
+    companion object {
+        private fun getSupportedContainers(): Array<SupportedExtensions> = arrayOf(TR)
+        private fun getCompressedTypes(): Array<SupportedExtensions> = arrayOf(MP3, JPEG, JPG)
+
+        fun isSupportedExtension(ext: String): Boolean = values().any { it.name == ext.toUpperCase() }
+
+        fun isSupportedContainer(ext: String): Boolean = getSupportedContainers().contains(valueOf(ext.toUpperCase()))
+        fun isCompressedType(ext: String): Boolean = getCompressedTypes().contains(valueOf(ext.toUpperCase()))
+    }
+}
+
+enum class Groupings(val grouping: String) {
+    BOOK("book"),
+    CHAPTER("chapter"),
+    VERSE("verse"),
+    CHUNK("chunk");
+
+    companion object {
+        fun isSupportedGrouping(grouping: String): Boolean = values().any { it.name == grouping.toUpperCase() }
+    }
+}
+
+class DirectoryLogic {
 
     fun buildFullFilePath(
         inputFile: File,
         languageCode: String,
         dublinCoreId: String,
-        group: String,
+        grouping: String,
         projectId: String = "",
         mediaExtension: String = "",
         mediaQuality: String = ""
     ): String {
 
-        validateInput(inputFile, languageCode, dublinCoreId, group, mediaExtension, mediaQuality)
+        validateInput(inputFile, languageCode, dublinCoreId, grouping, mediaExtension, mediaQuality)
 
         val projectPath = if (projectId.isBlank()) "" else "$projectId/"
         val compressionQuality = if (mediaQuality.isBlank()) "hi" else mediaQuality
 
         var path = "$languageCode/$dublinCoreId/${projectPath}CONTENTS/${inputFile.extension}/"
 
-        if (supportedContainers.contains(inputFile.extension)) {
-            path += if (compressedTypes.contains(mediaExtension)) "$mediaExtension/$compressionQuality/" else "$mediaExtension/"
+        if(SupportedExtensions.isSupportedContainer(inputFile.extension)) {
+            path += if (SupportedExtensions.isCompressedType(mediaExtension)) "$mediaExtension/$compressionQuality/" else "$mediaExtension/"
         } else {
-            if (compressedTypes.contains(inputFile.extension)) path += "$compressionQuality/"
+            if (SupportedExtensions.isCompressedType(inputFile.extension)) path += "$compressionQuality/"
         }
 
-        path += "$group/${inputFile.name}"
+        path += "$grouping/${inputFile.name}"
 
         return path
 
@@ -42,7 +66,7 @@ class DirectoryLogic {
         inputFile: File,
         languageCode: String,
         dublinCoreId: String,
-        group: String,
+        grouping: String,
         mediaExtension: String = "",
         mediaQuality: String = ""
     ) {
@@ -50,8 +74,8 @@ class DirectoryLogic {
         if (languageCode.isBlank()) throw IllegalArgumentException("Language Code is empty")
         if (dublinCoreId.isBlank()) throw IllegalArgumentException("Dublin Core ID is empty")
 
-        if (group.isBlank()) throw IllegalArgumentException("Group is empty")
-        if (!groupings.contains(group)) throw IllegalArgumentException("Group is not supported")
+        if (grouping.isBlank()) throw IllegalArgumentException("Group is empty")
+        if (!Groupings.isSupportedGrouping(grouping)) throw IllegalArgumentException("Group is not supported")
 
         validateExtensions(inputFile.extension, mediaExtension)
 
@@ -61,10 +85,10 @@ class DirectoryLogic {
 
     @Throws(IllegalArgumentException::class)
     private fun validateExtensions(fileExtension: String, mediaExtension: String) {
-        if (supportedContainers.contains(fileExtension)) {
+        if(SupportedExtensions.isSupportedContainer(fileExtension)) {
             if (mediaExtension.isBlank()) throw IllegalArgumentException("Media Extension is empty")
-            if (!supportedExtensions.contains(mediaExtension)) throw IllegalArgumentException("Media Extension is not supported")
-        } else if (!supportedExtensions.contains(fileExtension)) throw IllegalArgumentException(".${fileExtension} file is not supported")
+            if (!SupportedExtensions.isSupportedExtension(mediaExtension)) throw IllegalArgumentException("Media Extension is not supported")
+        } else if (!SupportedExtensions.isSupportedExtension(fileExtension)) throw IllegalArgumentException(".${fileExtension} file is not supported")
     }
 
 }
