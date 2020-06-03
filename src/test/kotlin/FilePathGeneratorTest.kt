@@ -36,7 +36,7 @@ class FilePathGeneratorTest {
         val testData = csvReader().readAll(testFile)
 
         for (i in 1 until testData.size) {
-            val ex = assertThrows<IllegalArgumentException> {
+            assertThrows<IllegalArgumentException> {
                 FilePathGenerator.createPathFromFile(
                         File(testData[i][0]),
                         testData[i][1],
