@@ -10,7 +10,7 @@ class FilePathGeneratorTest {
     @Test
     fun testPathCreationWithValidInput() {
 
-        val testFile = File("/home/dj/IdeaProjects/SADirectoryMaker/src/test/resources/TestCases.csv")
+        val testFile = File("./src/test/resources/TestCases.csv")
         val testData = csvReader().readAll(testFile)
 
         for (i in 1 until testData.size) {
@@ -32,7 +32,7 @@ class FilePathGeneratorTest {
     @Test
     fun testPathCreationWithExceptions() {
 
-        val testFile = File("/home/dj/IdeaProjects/SADirectoryMaker/src/test/resources/TestCasesException.csv")
+        val testFile = File("./src/test/resources/TestCasesException.csv")
         val testData = csvReader().readAll(testFile)
 
         for (i in 1 until testData.size) {
