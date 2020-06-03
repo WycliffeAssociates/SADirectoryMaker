@@ -5,21 +5,19 @@ import org.junit.jupiter.api.assertThrows
 import java.io.File
 import java.lang.IllegalArgumentException
 
-class DirectoryLogicTester {
-
-    private val directoryLogic = DirectoryLogic()
+class FilePathGeneratorTest {
 
     @Test
     fun testBuildFullFilePath() {
 
-        var testFile: File = File("D:\\Projects\\SADirectoryMaker\\src\\test\\resources\\TestCases.csv")
+        var testFile: File = File("/home/dj/IdeaProjects/SADirectoryMaker/src/test/resources/TestCases.csv")
         var testData = csvReader().readAll(testFile)
 
         for (i in 1 until testData.size) {
             assertEquals(
                     testData[i][7],
-                    directoryLogic.buildFullFilePath(
-                            testData[i][0],
+                    FilePathGenerator.createPathFromFile(
+                            File(testData[i][0]),
                             testData[i][1],
                             testData[i][2],
                             testData[i][6],
@@ -30,13 +28,13 @@ class DirectoryLogicTester {
             )
         }
 
-        testFile = File("D:\\Projects\\SADirectoryMaker\\src\\test\\resources\\TestCasesException.csv")
+        testFile = File("/home/dj/IdeaProjects/SADirectoryMaker/src/test/resources/TestCasesException.csv")
         testData = csvReader().readAll(testFile)
 
         for (i in 1 until testData.size) {
             val ex = assertThrows<IllegalArgumentException> {
-                directoryLogic.buildFullFilePath(
-                        testData[i][0],
+                FilePathGenerator.createPathFromFile(
+                        File(testData[i][0]),
                         testData[i][1],
                         testData[i][2],
                         testData[i][6],
