@@ -30,7 +30,7 @@ enum class Groupings(val grouping: String) {
     }
 }
 
-class DirectoryLogic {
+class FilePathGenerator {
 
     fun buildFullFilePath(
         inputFile: File,
