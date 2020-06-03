@@ -30,9 +30,18 @@ enum class Groupings(val grouping: String) {
     }
 }
 
-class FilePathGenerator {
+enum class MediaQuality(val quality: String) {
+    HI("hi"),
+    LOW("low");
 
-    fun buildFullFilePath(
+    companion object {
+        fun isSupportedQuality(quality: String): Boolean = values().any { it.name == quality.toUpperCase() }
+    }
+}
+
+object FilePathGenerator {
+
+    fun createPathFromFile(
         inputFile: File,
         languageCode: String,
         dublinCoreId: String,
@@ -79,7 +88,7 @@ class FilePathGenerator {
 
         validateExtensions(inputFile.extension, mediaExtension)
 
-        if (mediaQuality != "hi" && mediaQuality != "low" && mediaQuality.isNotBlank()) throw IllegalArgumentException("Media Quality is invalid")
+        if (!MediaQuality.isSupportedQuality(mediaQuality) && mediaQuality.isNotBlank()) throw IllegalArgumentException("Media Quality is invalid")
 
     }
 
