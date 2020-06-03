@@ -20,30 +20,21 @@ class DirectoryLogic {
 
         validateInput(inputFile, languageCode, dublinCoreId, group, mediaExtension, mediaQuality)
 
-        val fileExt = inputFile.extension
+        val projectPath = if (projectId.isBlank()) "" else "$projectId/"
+        val compressionQuality = if (mediaQuality.isBlank()) "hi" else mediaQuality
 
-        var path = ""
+        var path = "$languageCode/$dublinCoreId/${projectPath}CONTENTS/${inputFile.extension}/"
 
-        path += "$languageCode/$dublinCoreId/"
-
-        if (projectId.isNotBlank()) path += "$projectId/"
-
-        path += "CONTENTS/$fileExt"
-
-        if (supportedContainers.contains(fileExt)) {
-            path += "$mediaExtension/"
+        if (supportedContainers.contains(inputFile.extension)) {
+            path += if (compressedTypes.contains(mediaExtension)) "$mediaExtension/$compressionQuality/" else "$mediaExtension/"
+        } else {
+            if (compressedTypes.contains(inputFile.extension)) path += "$compressionQuality/"
         }
 
-        // if the file is a compressed type
-        if (compressedTypes.contains(fileExt) || compressedTypes.contains(mediaExtension)) {
-            path += if (mediaQuality.isBlank()) "hi/"
-            else "$mediaQuality/"
-        }
-
-        path += "$group/"
-        path += inputFile.name
+        path += "$group/${inputFile.name}"
 
         return path
+
     }
 
     @Throws(IllegalArgumentException::class)
@@ -56,20 +47,20 @@ class DirectoryLogic {
         mediaQuality: String = ""
     ) {
 
-        if(languageCode.isBlank()) throw IllegalArgumentException("Language Code is empty")
-        if(dublinCoreId.isBlank()) throw IllegalArgumentException("Dublin Core ID is empty")
+        if (languageCode.isBlank()) throw IllegalArgumentException("Language Code is empty")
+        if (dublinCoreId.isBlank()) throw IllegalArgumentException("Dublin Core ID is empty")
 
-        if(group.isBlank()) throw IllegalArgumentException("Group is empty")
-        if(!groupings.contains(group)) throw IllegalArgumentException("Group is not supported")
+        if (group.isBlank()) throw IllegalArgumentException("Group is empty")
+        if (!groupings.contains(group)) throw IllegalArgumentException("Group is not supported")
 
-        validateExtension(inputFile.extension, mediaExtension)
+        validateExtensions(inputFile.extension, mediaExtension)
 
         if (mediaQuality != "hi" && mediaQuality != "low" && mediaQuality.isNotBlank()) throw IllegalArgumentException("Media Quality is invalid")
 
     }
 
     @Throws(IllegalArgumentException::class)
-    private fun validateExtension(fileExtension: String, mediaExtension: String) {
+    private fun validateExtensions(fileExtension: String, mediaExtension: String) {
         if (supportedContainers.contains(fileExtension)) {
             if (mediaExtension.isBlank()) throw IllegalArgumentException("Media Extension is empty")
             if (!supportedExtensions.contains(mediaExtension)) throw IllegalArgumentException("Media Extension is not supported")
