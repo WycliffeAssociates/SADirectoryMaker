@@ -7,7 +7,6 @@ class DirectoryLogic {
     private val compressedTypes = arrayOf("mp3", "jpeg", "jpg")
     private val groupings = arrayOf("book", "chapter", "verse", "chunk")
 
-    @Throws(IllegalArgumentException::class)
     fun buildFullFilePath(
             inputFilePath: String,
             languageCode: String,
@@ -18,41 +17,60 @@ class DirectoryLogic {
             mediaQuality: String = ""
     ): String {
 
+        validateInput(inputFilePath, languageCode, dublinCoreId, group, projectId, mediaExtension, mediaQuality)
+
         val fileExt = inputFilePath.split("/").last().split('.').last()
 
         var path = ""
 
-        if (languageCode.isBlank()) throw IllegalArgumentException("Language code is empty")
-        path += "$languageCode/"
-
-        if (dublinCoreId.isBlank()) throw IllegalArgumentException("Dublin Code ID is empty")
-        path += "$dublinCoreId/"
-
-        if (group.isBlank()) throw IllegalArgumentException("Group is empty")
-        if (!groupings.contains(group)) throw IllegalArgumentException("Group is not supported")
+        path += "$languageCode/$dublinCoreId"
 
         if (projectId.isNotBlank()) path += "$projectId/"
 
-        path += "CONTENTS/"
-        path += "$fileExt/"
+        path += "CONTENTS/$fileExt"
 
         if (supportedContainers.contains(fileExt)) {
-            if (mediaExtension.isBlank()) throw IllegalArgumentException("Media Extension is empty")
-            if (!supportedExtensions.contains(mediaExtension)) throw IllegalArgumentException("Media Extension is not supported")
             path += "$mediaExtension/"
-        } else if (!supportedExtensions.contains(fileExt)) throw IllegalArgumentException(".$fileExt file is not supported")
+        }
 
         // if the file is a compressed type
         if (compressedTypes.contains(fileExt) || compressedTypes.contains(mediaExtension)) {
             path += if (mediaQuality.isBlank()) "hi/"
-            else if (mediaQuality == "hi" || mediaQuality == "low") "$mediaQuality/"
-            else throw IllegalArgumentException("Media Quality is invalid")
+            else "$mediaQuality/"
         }
 
         path += "$group/"
         path += getFileNameFromFullPath(inputFilePath)
 
         return path
+    }
+
+    @Throws(IllegalArgumentException::class)
+    fun validateInput(
+        inputFilePath: String,
+        languageCode: String,
+        dublinCoreId: String,
+        group: String,
+        projectId: String = "",
+        mediaExtension: String = "",
+        mediaQuality: String = ""
+    ) {
+
+        val fileExt = inputFilePath.split("/").last().split('.').last()
+
+        if (languageCode.isBlank()) throw IllegalArgumentException("Language code is empty")
+        if (dublinCoreId.isBlank()) throw IllegalArgumentException("Dublin Code ID is empty")
+
+        if (group.isBlank()) throw IllegalArgumentException("Group is empty")
+        if (!groupings.contains(group)) throw IllegalArgumentException("Group is not supported")
+
+        if (supportedContainers.contains(fileExt)) {
+            if (mediaExtension.isBlank()) throw IllegalArgumentException("Media Extension is empty")
+            if (!supportedExtensions.contains(mediaExtension)) throw IllegalArgumentException("Media Extension is not supported")
+        } else if (!supportedExtensions.contains(fileExt)) throw IllegalArgumentException(".$fileExt file is not supported")
+
+        if(mediaQuality != "hi" && mediaQuality != "low" && !mediaQuality.isBlank()) throw IllegalArgumentException("Media Quality is invalid")
+
     }
 
     @Throws(IllegalArgumentException::class)
