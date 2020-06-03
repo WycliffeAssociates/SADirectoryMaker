@@ -1,0 +1,7 @@
+fileName,languageCode,dublincoreId,projectId,mediaExtension,mediaQuality,group,expectedResult
+/home/tony_and_dj/en_ulb_gen_chunk.mp3,en,ulb,gen,,,,IllegalArgumentException
+/home/tony_and_dj/en_ulb_gen_chunk.mp3,en,ulb,gen,,low,chnk,IllegalArgumentException
+/home/tony_and_dj/en_ulb_gen_chunk.mp3,,ulb,gen,,,chunk,IllegalArgumentException
+/home/tony_and_dj/fr_ulb_exo_verse.mp3,fr,ulb,exo,,medium,verse,IllegalArgumentException
+/home/tony_and_dj/en_ulb_gen_chunk.mp3,,,,,,,IllegalArgumentException
+/home/tony_and_dj/en_ulb_gen_chunk.gif,en,ulb,gen,mp3,low,chunk,IllegalArgumentException

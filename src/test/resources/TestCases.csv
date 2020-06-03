@@ -6,9 +6,5 @@ fileName,languageCode,dublincoreId,projectId,mediaExtension,mediaQuality,group,e
 /home/tony_and_dj/fr_ulb_gen_chapter.mp3,fr,ulb,gen,,low,chapter,fr/ulb/gen/CONTENTS/mp3/low/chapter/fr_ulb_gen_chapter.mp3
 /home/tony_and_dj/ja_ulb_mrk_book.wav,ja,ulb,mrk,,,book,ja/ulb/mrk/CONTENTS/wav/book/ja_ulb_mrk_book.wav
 /home/tony_and_dj/vn_ulb_exo_chapter.jpg,vn,ulb,exo,,low,chapter,vn/ulb/exo/CONTENTS/jpg/low/chapter/vn_ulb_exo_chapter.jpg
+/home/tony_and_dj/zh_yml_chapter.wav,zh,yml,,mp4,lo,chapter,zh/yml/CONTENTS/wav/chapter/zh_yml_chapter.wav
 /home/tony_and_dj/zh_yml_chunk.wav,zh,yml,,,,chunk,zh/yml/CONTENTS/wav/chunk/zh_yml_chunk.wav
-/home/tony_and_dj/en_ulb_gen_chunk.mp3,en,ulb,gen,,,,IllegalArgumentException
-/home/tony_and_dj/en_ulb_gen_chunk.mp3,en,ulb,gen,,low,chnk,IllegalArgumentException
-/home/tony_and_dj/en_ulb_gen_chunk.mp3,,ulb,gen,,,chunk,IllegalArgumentException
-/home/tony_and_dj/fr_ulb_exo_verse.mp3,fr,ulb,exo,,medium,verse,IllegalArgumentException
-/home/tony_and_dj/en_ulb_gen_chunk.mp3,,,,,,,IllegalArgumentException
