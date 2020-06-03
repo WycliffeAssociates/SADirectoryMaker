@@ -29,6 +29,7 @@ class DirectoryLogic {
         path += "$dublinCoreId/"
 
         if (group.isBlank()) throw IllegalArgumentException("Group is empty")
+        if (!groupings.contains(group)) throw IllegalArgumentException("Group is not supported")
 
         if (projectId.isNotBlank()) path += "$projectId/"
 
@@ -47,8 +48,6 @@ class DirectoryLogic {
             else if (mediaQuality == "hi" || mediaQuality == "low") "$mediaQuality/"
             else throw IllegalArgumentException("Media Quality is invalid")
         }
-
-        if (!groupings.contains(group)) throw IllegalArgumentException("Group is not supported")
 
         path += "$group/"
         path += getFileNameFromFullPath(inputFilePath)

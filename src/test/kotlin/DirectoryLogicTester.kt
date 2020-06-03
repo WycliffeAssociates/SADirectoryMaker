@@ -12,7 +12,7 @@ class DirectoryLogicTester {
     @Test
     fun testBuildFullFilePath() {
 
-        var testFile: File = File("/home/dj/IdeaProjects/SADirectoryMaker/src/test/resources/TestCases.csv")
+        var testFile: File = File("D:\\Projects\\SADirectoryMaker\\src\\test\\resources\\TestCases.csv")
         var testData = csvReader().readAll(testFile)
 
         for (i in 1 until testData.size) {
@@ -30,7 +30,7 @@ class DirectoryLogicTester {
             )
         }
 
-        testFile = File("/home/dj/IdeaProjects/SADirectoryMaker/src/test/resources/TestCasesException.csv")
+        testFile = File("D:\\Projects\\SADirectoryMaker\\src\\test\\resources\\TestCasesException.csv")
         testData = csvReader().readAll(testFile)
 
         for (i in 1 until testData.size) {
