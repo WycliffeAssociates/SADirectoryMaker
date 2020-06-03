@@ -8,28 +8,32 @@ import java.lang.IllegalArgumentException
 class FilePathGeneratorTest {
 
     @Test
-    fun testBuildFullFilePath() {
+    fun testPathCreationWithValidInput() {
 
-        var testFile: File = File("/home/dj/IdeaProjects/SADirectoryMaker/src/test/resources/TestCases.csv")
-        var testData = csvReader().readAll(testFile)
+        val testFile = File("/home/dj/IdeaProjects/SADirectoryMaker/src/test/resources/TestCases.csv")
+        val testData = csvReader().readAll(testFile)
 
         for (i in 1 until testData.size) {
             assertEquals(
-                    testData[i][7],
-                    FilePathGenerator.createPathFromFile(
-                            File(testData[i][0]),
-                            testData[i][1],
-                            testData[i][2],
-                            testData[i][6],
-                            testData[i][3],
-                            testData[i][4],
-                            testData[i][5]
-                    ), "row $i"
+                testData[i][7],
+                FilePathGenerator.createPathFromFile(
+                    File(testData[i][0]),
+                    testData[i][1],
+                    testData[i][2],
+                    testData[i][6],
+                    testData[i][3],
+                    testData[i][4],
+                    testData[i][5]
+                ), "row $i"
             )
         }
+    }
 
-        testFile = File("/home/dj/IdeaProjects/SADirectoryMaker/src/test/resources/TestCasesException.csv")
-        testData = csvReader().readAll(testFile)
+    @Test
+    fun testPathCreationWithExceptions() {
+
+        val testFile = File("/home/dj/IdeaProjects/SADirectoryMaker/src/test/resources/TestCasesException.csv")
+        val testData = csvReader().readAll(testFile)
 
         for (i in 1 until testData.size) {
             val ex = assertThrows<IllegalArgumentException> {
@@ -44,7 +48,5 @@ class FilePathGeneratorTest {
                 )
             }
         }
-
     }
-
 }
