@@ -1,11 +1,14 @@
 package org.wycliffeassociates.sourceaudio.common.data.model
 
-enum class CompressedExtensions(ext: String) {
+enum class CompressedExtensions(vararg val ext: String) {
     MP3("mp3"),
-    JPEG("jpeg"),
-    JPG("jpg");
+    JPG("jpeg", "jpg");
 
-    companion object: SupportedExtensions {
-        override fun isSupported(ext: String): Boolean = values().any { it.name == ext.toUpperCase() }
+    companion object : SupportedExtensions {
+        override fun isSupported(extension: String): Boolean {
+            return values().any {
+                it.name == extension.toUpperCase() || it.ext.contains(extension)
+            }
+        }
     }
 }

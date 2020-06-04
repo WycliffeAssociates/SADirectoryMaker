@@ -2,6 +2,6 @@ package org.wycliffeassociates.sourceaudio.common.data.model
 
 interface SupportedExtensions {
 
-    fun isSupported(ext: String): Boolean
+    fun isSupported(extension: String): Boolean
 
 }
