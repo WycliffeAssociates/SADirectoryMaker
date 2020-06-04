@@ -42,7 +42,7 @@ object FilePathGenerator {
     ): String {
         return when {
             projectId.isBlank() -> "$languageCode/$dublinCoreId/CONTENTS/$inputFileExtension"
-            else -> "$languageCode/$dublinCoreId/${projectId}CONTENTS/$inputFileExtension"
+            else -> "$languageCode/$dublinCoreId/${projectId}/CONTENTS/$inputFileExtension"
         }
     }
 }
