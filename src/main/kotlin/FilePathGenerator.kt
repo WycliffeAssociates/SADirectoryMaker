@@ -48,20 +48,19 @@ object FilePathGenerator {
         grouping: String,
         projectId: String = "",
         mediaExtension: String = "",
-        mediaQuality: String = ""
+        mediaQuality: String = "hi"
     ): String {
 
         validateInput(inputFile, languageCode, dublinCoreId, grouping, mediaExtension, mediaQuality)
 
         val projectPath = if (projectId.isBlank()) "" else "$projectId/"
-        val compressionQuality = if (mediaQuality.isBlank()) "hi" else mediaQuality
 
         var path = "$languageCode/$dublinCoreId/${projectPath}CONTENTS/${inputFile.extension}/"
 
         if(SupportedExtensions.isSupportedContainer(inputFile.extension)) {
-            path += if (SupportedExtensions.isCompressedType(mediaExtension)) "$mediaExtension/$compressionQuality/" else "$mediaExtension/"
+            path += if (SupportedExtensions.isCompressedType(mediaExtension)) "$mediaExtension/$mediaQuality/" else "$mediaExtension/"
         } else {
-            if (SupportedExtensions.isCompressedType(inputFile.extension)) path += "$compressionQuality/"
+            if (SupportedExtensions.isCompressedType(inputFile.extension)) path += "$mediaQuality/"
         }
 
         path += "$grouping/${inputFile.name}"
@@ -88,7 +87,7 @@ object FilePathGenerator {
 
         validateExtensions(inputFile.extension, mediaExtension)
 
-        if (!MediaQuality.isSupportedQuality(mediaQuality) && mediaQuality.isNotBlank()) throw IllegalArgumentException("Media Quality is invalid")
+        if (!MediaQuality.isSupportedQuality(mediaQuality)) throw IllegalArgumentException("Media Quality is invalid")
 
     }
 
