@@ -5,6 +5,6 @@ enum class MediaQuality(val quality: String) {
     LOW("low");
 
     companion object {
-        fun isSupportedQuality(quality: String): Boolean = values().any { it.name == quality.toUpperCase() }
+        fun isSupported(quality: String): Boolean = values().any { it.name == quality.toUpperCase() }
     }
 }

@@ -22,9 +22,9 @@ object FilePathGenerator {
 
         val project = if (projectId.isBlank()) "" else "$projectId/"
 
-        val isContainer = SupportedExtensions.isSupportedContainer(inputFile.extension)
-        val isContainerAndCompressed = isContainer && SupportedExtensions.isCompressedType(mediaExtension)
-        val isFileAndCompressed = !isContainer && SupportedExtensions.isCompressedType(inputFile.extension)
+        val isContainer = SupportedExtensions.isContainer(inputFile.extension)
+        val isContainerAndCompressed = isContainer && SupportedExtensions.isCompressed(mediaExtension)
+        val isFileAndCompressed = !isContainer && SupportedExtensions.isCompressed(inputFile.extension)
 
         return when {
             isContainerAndCompressed -> "$languageCode/$dublinCoreId/${project}CONTENTS/${inputFile.extension}/$mediaExtension/$mediaQuality/$grouping/${inputFile.name}"
@@ -47,18 +47,18 @@ object FilePathGenerator {
         if (dublinCoreId.isBlank()) throw IllegalArgumentException("Dublin Core ID is empty")
         if (grouping.isBlank()) throw IllegalArgumentException("Group is empty")
 
-        if (!Groupings.isSupportedGrouping(grouping)) throw IllegalArgumentException("Group is not supported")
-        if (!MediaQuality.isSupportedQuality(mediaQuality)) throw IllegalArgumentException("Media Quality is invalid")
+        if (!Groupings.isSupported(grouping)) throw IllegalArgumentException("Group is not supported")
+        if (!MediaQuality.isSupported(mediaQuality)) throw IllegalArgumentException("Media Quality is invalid")
 
         validateExtensions(inputFile.extension, mediaExtension)
     }
 
     @Throws(IllegalArgumentException::class)
     private fun validateExtensions(fileExtension: String, mediaExtension: String) {
-        if (SupportedExtensions.isSupportedContainer(fileExtension)) {
+        if (SupportedExtensions.isContainer(fileExtension)) {
             if (mediaExtension.isBlank()) throw IllegalArgumentException("Media Extension is empty")
-            if (!SupportedExtensions.isSupportedExtension(mediaExtension)) throw IllegalArgumentException("Media Extension is not supported")
-        } else if (!SupportedExtensions.isSupportedExtension(fileExtension)) throw IllegalArgumentException(".${fileExtension} file is not supported")
+            if (!SupportedExtensions.isSupported(mediaExtension)) throw IllegalArgumentException("Media Extension is not supported")
+        } else if (!SupportedExtensions.isSupported(fileExtension)) throw IllegalArgumentException(".${fileExtension} file is not supported")
     }
 
 }

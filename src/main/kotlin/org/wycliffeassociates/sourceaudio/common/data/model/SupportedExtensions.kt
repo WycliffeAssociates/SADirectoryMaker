@@ -8,20 +8,11 @@ enum class SupportedExtensions(ext: String) {
     TR("tr");
 
     companion object {
-        private fun getSupportedContainers(): Array<SupportedExtensions> = arrayOf(
-            TR
-        )
-        private fun getCompressedTypes(): Array<SupportedExtensions> = arrayOf(
-            MP3,
-            JPEG,
-            JPG
-        )
+        private fun getContainers(): Array<SupportedExtensions> = arrayOf(TR)
+        private fun getCompressedTypes(): Array<SupportedExtensions> = arrayOf(MP3, JPEG, JPG)
 
-        fun isSupportedExtension(ext: String): Boolean = values().any { it.name == ext.toUpperCase() }
-
-        fun isSupportedContainer(ext: String): Boolean = getSupportedContainers()
-            .contains(valueOf(ext.toUpperCase()))
-        fun isCompressedType(ext: String): Boolean = getCompressedTypes()
-            .contains(valueOf(ext.toUpperCase()))
+        fun isSupported(ext: String): Boolean = values().any { it.name == ext.toUpperCase() }
+        fun isContainer(ext: String): Boolean = getContainers().contains(valueOf(ext.toUpperCase()))
+        fun isCompressed(ext: String): Boolean = getCompressedTypes().contains(valueOf(ext.toUpperCase()))
     }
 }

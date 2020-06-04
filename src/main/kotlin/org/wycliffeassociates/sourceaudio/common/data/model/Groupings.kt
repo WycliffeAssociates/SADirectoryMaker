@@ -7,6 +7,6 @@ enum class Groupings(val grouping: String) {
     CHUNK("chunk");
 
     companion object {
-        fun isSupportedGrouping(grouping: String): Boolean = values().any { it.name == grouping.toUpperCase() }
+        fun isSupported(grouping: String): Boolean = values().any { it.name == grouping.toUpperCase() }
     }
 }
