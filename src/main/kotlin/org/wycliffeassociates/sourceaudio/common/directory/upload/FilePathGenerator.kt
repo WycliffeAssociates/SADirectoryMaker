@@ -6,6 +6,7 @@ import java.lang.IllegalArgumentException
 
 object FilePathGenerator {
 
+    @Throws(IllegalArgumentException::class)
     fun createPathFromFile(
         inputFile: File,
         languageCode: String,
@@ -17,37 +18,35 @@ object FilePathGenerator {
     ): String {
         validateInput(inputFile, languageCode, dublinCoreId, grouping, mediaExtension, mediaQuality)
 
-        val project = if (projectId.isBlank()) "" else "$projectId/"
+        val pathPrefix = getPathPrefix(languageCode, dublinCoreId, projectId, inputFile.extension)
 
         val isContainer = ContainerExtensions.isSupported(inputFile.extension)
         val isContainerAndCompressed = isContainer && CompressedExtensions.isSupported(mediaExtension)
         val isFileAndCompressed = !isContainer && CompressedExtensions.isSupported(inputFile.extension)
+
         return when {
-            isContainerAndCompressed -> "$languageCode/$dublinCoreId/${project}CONTENTS/${inputFile.extension}/$mediaExtension/$mediaQuality/$grouping/${inputFile.name}"
-            isContainer -> "$languageCode/$dublinCoreId/${project}CONTENTS/${inputFile.extension}/$mediaExtension/$grouping/${inputFile.name}"
-            isFileAndCompressed -> "$languageCode/$dublinCoreId/${project}CONTENTS/${inputFile.extension}/$mediaQuality/$grouping/${inputFile.name}"
-            else -> "$languageCode/$dublinCoreId/${project}CONTENTS/${inputFile.extension}/$grouping/${inputFile.name}"
+            isContainerAndCompressed -> "$pathPrefix/$mediaExtension/$mediaQuality/$grouping/${inputFile.name}"
+            isContainer -> "$pathPrefix/$mediaExtension/$grouping/${inputFile.name}"
+            isFileAndCompressed -> "$pathPrefix/$mediaQuality/$grouping/${inputFile.name}"
+            else -> "$pathPrefix/$grouping/${inputFile.name}"
         }
     }
 
     @Throws(IllegalArgumentException::class)
-    fun validateInput(
+    private fun validateInput(
         inputFile: File,
         languageCode: String,
         dublinCoreId: String,
         grouping: String,
-        mediaExtension: String = "",
-        mediaQuality: String = ""
+        mediaExtension: String,
+        mediaQuality: String
     ) {
-        if (languageCode.isBlank()) throw IllegalArgumentException("Language Code is empty")
-        if (dublinCoreId.isBlank()) throw IllegalArgumentException("Dublin Core ID is empty")
-        if (grouping.isBlank()) throw IllegalArgumentException("Group is empty")
-        if (!Groupings.isSupported(grouping)) {
-            throw IllegalArgumentException("Group is not supported")
-        }
-        if (!MediaQuality.isSupported(mediaQuality)) {
-            throw IllegalArgumentException("Media Quality is invalid")
-        }
+        if (languageCode.isBlank()) { throw IllegalArgumentException("Language Code is empty") }
+        if (dublinCoreId.isBlank()) { throw IllegalArgumentException("Dublin Core ID is empty") }
+        if (grouping.isBlank()) { throw IllegalArgumentException("Group is empty") }
+        if (!Groupings.isSupported(grouping)) { throw IllegalArgumentException("Group is not supported") }
+        if (!MediaQuality.isSupported(mediaQuality)) { throw IllegalArgumentException("Media Quality is invalid") }
+
         validateExtensions(inputFile.extension, mediaExtension)
     }
 
@@ -62,6 +61,18 @@ object FilePathGenerator {
             }
         } else if (!CompressedExtensions.isSupported(fileExtension) && !UncompressedExtensions.isSupported(fileExtension)) {
             throw IllegalArgumentException(".${fileExtension} file is not supported")
+        }
+    }
+
+    private fun getPathPrefix(
+        languageCode: String,
+        dublinCoreId: String,
+        projectId: String,
+        inputFileExtension: String
+    ): String {
+        return when {
+            projectId.isBlank() -> "$languageCode/$dublinCoreId/CONTENTS/$inputFileExtension"
+            else -> "$languageCode/$dublinCoreId/${projectId}CONTENTS/$inputFileExtension"
         }
     }
 }
