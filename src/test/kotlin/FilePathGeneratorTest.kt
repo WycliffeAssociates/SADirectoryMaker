@@ -2,6 +2,7 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.assertThrows
+import org.wycliffeassociates.sourceaudio.common.data.model.FileUploadModel
 import org.wycliffeassociates.sourceaudio.common.directory.upload.FilePathGenerator
 import java.io.File
 import java.lang.IllegalArgumentException
@@ -32,22 +33,26 @@ class FilePathGeneratorTest {
     fun executeCreatePathFunction(testDataRow: List<String>): String {
         if (testDataRow[5].isEmpty()) {
             return FilePathGenerator.createPathFromFile(
-                File(testDataRow[0]),
-                testDataRow[1],
-                testDataRow[2],
-                testDataRow[6],
-                testDataRow[3],
-                testDataRow[4]
+                FileUploadModel(
+                    File(testDataRow[0]),
+                    testDataRow[1],
+                    testDataRow[2],
+                    testDataRow[6],
+                    testDataRow[3],
+                    testDataRow[4]
+                )
             )
         } else {
             return FilePathGenerator.createPathFromFile(
-                File(testDataRow[0]),
-                testDataRow[1],
-                testDataRow[2],
-                testDataRow[6],
-                testDataRow[3],
-                testDataRow[4],
-                testDataRow[5]
+                FileUploadModel(
+                    File(testDataRow[0]),
+                    testDataRow[1],
+                    testDataRow[2],
+                    testDataRow[6],
+                    testDataRow[3],
+                    testDataRow[4],
+                    testDataRow[5]
+                )
             )
         }
     }
