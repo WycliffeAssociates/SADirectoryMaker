@@ -1,4 +1,4 @@
-package org.wycliffeassociates.sourceaudio.directorymaker.common.data.model
+package org.wycliffeassociates.sourceaudio.common.data.model
 
 enum class Groupings(val grouping: String) {
     BOOK("book"),

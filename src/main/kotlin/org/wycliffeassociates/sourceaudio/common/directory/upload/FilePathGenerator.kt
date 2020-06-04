@@ -1,8 +1,8 @@
-package org.wycliffeassociates.sourceaudio.directorymaker.common
+package org.wycliffeassociates.sourceaudio.common.directory.upload
 
-import org.wycliffeassociates.sourceaudio.directorymaker.common.data.model.SupportedExtensions
-import org.wycliffeassociates.sourceaudio.directorymaker.common.data.model.MediaQuality
-import org.wycliffeassociates.sourceaudio.directorymaker.common.data.model.Groupings
+import org.wycliffeassociates.sourceaudio.common.data.model.SupportedExtensions
+import org.wycliffeassociates.sourceaudio.common.data.model.MediaQuality
+import org.wycliffeassociates.sourceaudio.common.data.model.Groupings
 import java.io.File
 import java.lang.IllegalArgumentException
 
@@ -31,7 +31,7 @@ object FilePathGenerator {
 
         var path = "$languageCode/$dublinCoreId/${projectPath}CONTENTS/${inputFile.extension}/"
 
-        if(SupportedExtensions.isSupportedContainer(
+        if (SupportedExtensions.isSupportedContainer(
                 inputFile.extension
             )
         ) {
@@ -85,7 +85,7 @@ object FilePathGenerator {
 
     @Throws(IllegalArgumentException::class)
     private fun validateExtensions(fileExtension: String, mediaExtension: String) {
-        if(SupportedExtensions.isSupportedContainer(
+        if (SupportedExtensions.isSupportedContainer(
                 fileExtension
             )
         ) {

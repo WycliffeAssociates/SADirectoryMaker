@@ -1,4 +1,4 @@
-package org.wycliffeassociates.sourceaudio.directorymaker.common.data.model
+package org.wycliffeassociates.sourceaudio.common.data.model
 
 enum class SupportedExtensions(ext: String) {
     WAV("wav"),
