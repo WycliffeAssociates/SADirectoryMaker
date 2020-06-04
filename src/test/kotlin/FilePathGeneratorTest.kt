@@ -1,8 +1,8 @@
-import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.assertThrows
-import org.wycliffeassociates.sourceaudio.common.data.model.FileUploadModel
 import org.wycliffeassociates.sourceaudio.common.directory.upload.FilePathGenerator
 import java.io.File
 import java.lang.IllegalArgumentException
@@ -11,49 +11,35 @@ class FilePathGeneratorTest {
 
     @Test
     fun testPathCreationWithValidInput() {
-        val testFile = File("./src/test/resources/TestCases.csv")
-        val testData = csvReader().readAll(testFile)
+        val modelList: List<FilePathTestModel> = getModelList("./src/test/resources/TestCases.json")
 
-        for (i in 1 until testData.size) {
-            assertEquals(testData[i][7], executeCreatePathFunction(testData[i]), "row ${i + 1}")
+        for (element in modelList) {
+            assertEquals(
+                element.expectedResult,
+                executeCreatePathFunction(element),
+                "Model at index: ${modelList.indexOf(element)}"
+            )
         }
     }
 
     @Test
     fun testPathCreationWithExceptions() {
-        val testFile = File("./src/test/resources/TestCasesException.csv")
-        val testData = csvReader().readAll(testFile)
+        val modelList: List<FilePathTestModel> = getModelList("./src/test/resources/TestCasesException.json")
 
-        for (i in 1 until testData.size) {
-            assertThrows<IllegalArgumentException> { executeCreatePathFunction(testData[i]) }
+        for (element in modelList) {
+            assertThrows<IllegalArgumentException> { executeCreatePathFunction(element) }
         }
     }
 
+    private fun getModelList(filePath: String): List<FilePathTestModel> {
+        val jsonTestFile = File(filePath)
+        val mapper = jacksonObjectMapper()
+
+        return mapper.readValue(jsonTestFile.readText())
+    }
+
     @Throws(IllegalArgumentException::class)
-    fun executeCreatePathFunction(testDataRow: List<String>): String {
-        if (testDataRow[5].isEmpty()) {
-            return FilePathGenerator.createPathFromFile(
-                FileUploadModel(
-                    File(testDataRow[0]),
-                    testDataRow[1],
-                    testDataRow[2],
-                    testDataRow[6],
-                    testDataRow[3],
-                    testDataRow[4]
-                )
-            )
-        } else {
-            return FilePathGenerator.createPathFromFile(
-                FileUploadModel(
-                    File(testDataRow[0]),
-                    testDataRow[1],
-                    testDataRow[2],
-                    testDataRow[6],
-                    testDataRow[3],
-                    testDataRow[4],
-                    testDataRow[5]
-                )
-            )
-        }
+    private fun executeCreatePathFunction(testModel: FilePathTestModel): String {
+        return FilePathGenerator.createPathFromFile(testModel.getFileUploadModel())
     }
 }
