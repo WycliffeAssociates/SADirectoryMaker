@@ -18,38 +18,20 @@ object FilePathGenerator {
         mediaQuality: String = "hi"
     ): String {
 
-        validateInput(
-            inputFile,
-            languageCode,
-            dublinCoreId,
-            grouping,
-            mediaExtension,
-            mediaQuality
-        )
+        validateInput(inputFile, languageCode, dublinCoreId, grouping, mediaExtension, mediaQuality)
 
-        val projectPath = if (projectId.isBlank()) "" else "$projectId/"
+        val project = if (projectId.isBlank()) "" else "$projectId/"
 
-        var path = "$languageCode/$dublinCoreId/${projectPath}CONTENTS/${inputFile.extension}/"
+        val isContainer = SupportedExtensions.isSupportedContainer(inputFile.extension)
+        val isContainerAndCompressed = isContainer && SupportedExtensions.isCompressedType(mediaExtension)
+        val isFileAndCompressed = !isContainer && SupportedExtensions.isCompressedType(inputFile.extension)
 
-        if (SupportedExtensions.isSupportedContainer(
-                inputFile.extension
-            )
-        ) {
-            path += if (SupportedExtensions.isCompressedType(
-                    mediaExtension
-                )
-            ) "$mediaExtension/$mediaQuality/" else "$mediaExtension/"
-        } else {
-            if (SupportedExtensions.isCompressedType(
-                    inputFile.extension
-                )
-            ) path += "$mediaQuality/"
+        return when {
+            isContainerAndCompressed -> "$languageCode/$dublinCoreId/${project}CONTENTS/${inputFile.extension}/$mediaExtension/$mediaQuality/$grouping/${inputFile.name}"
+            isContainer -> "$languageCode/$dublinCoreId/${project}CONTENTS/${inputFile.extension}/$mediaExtension/$grouping/${inputFile.name}"
+            isFileAndCompressed -> "$languageCode/$dublinCoreId/${project}CONTENTS/${inputFile.extension}/$mediaQuality/$grouping/${inputFile.name}"
+            else -> "$languageCode/$dublinCoreId/${project}CONTENTS/${inputFile.extension}/$grouping/${inputFile.name}"
         }
-
-        path += "$grouping/${inputFile.name}"
-
-        return path
-
     }
 
     @Throws(IllegalArgumentException::class)
@@ -61,43 +43,22 @@ object FilePathGenerator {
         mediaExtension: String = "",
         mediaQuality: String = ""
     ) {
-
         if (languageCode.isBlank()) throw IllegalArgumentException("Language Code is empty")
         if (dublinCoreId.isBlank()) throw IllegalArgumentException("Dublin Core ID is empty")
-
         if (grouping.isBlank()) throw IllegalArgumentException("Group is empty")
-        if (!Groupings.isSupportedGrouping(
-                grouping
-            )
-        ) throw IllegalArgumentException("Group is not supported")
 
-        validateExtensions(
-            inputFile.extension,
-            mediaExtension
-        )
+        if (!Groupings.isSupportedGrouping(grouping)) throw IllegalArgumentException("Group is not supported")
+        if (!MediaQuality.isSupportedQuality(mediaQuality)) throw IllegalArgumentException("Media Quality is invalid")
 
-        if (!MediaQuality.isSupportedQuality(
-                mediaQuality
-            )
-        ) throw IllegalArgumentException("Media Quality is invalid")
-
+        validateExtensions(inputFile.extension, mediaExtension)
     }
 
     @Throws(IllegalArgumentException::class)
     private fun validateExtensions(fileExtension: String, mediaExtension: String) {
-        if (SupportedExtensions.isSupportedContainer(
-                fileExtension
-            )
-        ) {
+        if (SupportedExtensions.isSupportedContainer(fileExtension)) {
             if (mediaExtension.isBlank()) throw IllegalArgumentException("Media Extension is empty")
-            if (!SupportedExtensions.isSupportedExtension(
-                    mediaExtension
-                )
-            ) throw IllegalArgumentException("Media Extension is not supported")
-        } else if (!SupportedExtensions.isSupportedExtension(
-                fileExtension
-            )
-        ) throw IllegalArgumentException(".${fileExtension} file is not supported")
+            if (!SupportedExtensions.isSupportedExtension(mediaExtension)) throw IllegalArgumentException("Media Extension is not supported")
+        } else if (!SupportedExtensions.isSupportedExtension(fileExtension)) throw IllegalArgumentException(".${fileExtension} file is not supported")
     }
 
 }
