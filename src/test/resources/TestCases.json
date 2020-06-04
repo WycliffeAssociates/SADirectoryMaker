@@ -15,7 +15,6 @@
     "dublinCoreId": "ulb",
     "projectId": "gen",
     "mediaExtension": "mp3",
-    "mediaQuality": "",
     "grouping": "chunk",
     "expectedResult": "aa/ulb/gen/CONTENTS/tr/mp3/hi/chunk/aa_ulb_gen_chunk.tr"
   },
@@ -25,7 +24,6 @@
     "dublinCoreId": "ulb",
     "projectId": "gen",
     "mediaExtension": "",
-    "mediaQuality": "",
     "grouping": "verse",
     "expectedResult": "en/ulb/gen/CONTENTS/mp3/hi/verse/en_ulb_gen_verse.mp3"
   },
@@ -35,7 +33,6 @@
     "dublinCoreId": "ulb",
     "projectId": "",
     "mediaExtension": "",
-    "mediaQuality": "",
     "grouping": "chunk",
     "expectedResult": "en/ulb/CONTENTS/mp3/hi/chunk/en_ulb_chunk.mp3"
   },
@@ -55,7 +52,6 @@
     "dublinCoreId": "ulb",
     "projectId": "mrk",
     "mediaExtension": "",
-    "mediaQuality": "",
     "grouping": "book",
     "expectedResult": "ja/ulb/mrk/CONTENTS/wav/book/ja_ulb_mrk_book.wav"
   },
@@ -75,7 +71,6 @@
     "dublinCoreId": "yml",
     "projectId": "",
     "mediaExtension": "",
-    "mediaQuality": "",
     "grouping": "chapter",
     "expectedResult": "zh/yml/CONTENTS/wav/chapter/zh_yml_chapter.wav"
   },
@@ -85,7 +80,6 @@
     "dublinCoreId": "yml",
     "projectId": "",
     "mediaExtension": "",
-    "mediaQuality": "",
     "grouping": "chunk",
     "expectedResult": "zh/yml/CONTENTS/wav/chunk/zh_yml_chunk.wav"
   }

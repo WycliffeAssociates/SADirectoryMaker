@@ -14,10 +14,6 @@ data class FilePathTestModel(
     private val inputFile: File = File(fileName)
 
     fun getFileUploadModel(): FileUploadModel {
-        return if(mediaQuality.isEmpty()) {
-            FileUploadModel(inputFile, languageCode, dublinCoreId, grouping, projectId, mediaExtension)
-        } else {
-            FileUploadModel(inputFile, languageCode, dublinCoreId, grouping, projectId, mediaExtension, mediaQuality)
-        }
+        return FileUploadModel(inputFile, languageCode, dublinCoreId, grouping, projectId, mediaExtension, mediaQuality)
     }
 }

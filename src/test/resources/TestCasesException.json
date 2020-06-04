@@ -5,7 +5,6 @@
     "dublinCoreId": "ulb",
     "projectId": "gen",
     "mediaExtension": "",
-    "mediaQuality": "",
     "grouping": "",
     "expectedResult": "IllegalArgumentException"
   },
@@ -25,7 +24,6 @@
     "dublinCoreId": "ulb",
     "projectId": "gen",
     "mediaExtension": "",
-    "mediaQuality": "",
     "grouping": "chunk",
     "expectedResult": "IllegalArgumentException"
   },
@@ -45,7 +43,6 @@
     "dublinCoreId": "",
     "projectId": "",
     "mediaExtension": "",
-    "mediaQuality": "",
     "grouping": "",
     "expectedResult": "IllegalArgumentException"
   },
