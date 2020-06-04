@@ -1,0 +1,62 @@
+[
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
+    "languageCode": "en",
+    "dublinCoreId": "ulb",
+    "projectId": "gen",
+    "mediaExtension": "",
+    "mediaQuality": "",
+    "grouping": "",
+    "expectedResult": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
+    "languageCode": "en",
+    "dublinCoreId": "ulb",
+    "projectId": "gen",
+    "mediaExtension": "",
+    "mediaQuality": "low",
+    "grouping": "chnk",
+    "expectedResult": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
+    "languageCode": "",
+    "dublinCoreId": "ulb",
+    "projectId": "gen",
+    "mediaExtension": "",
+    "mediaQuality": "",
+    "grouping": "chunk",
+    "expectedResult": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/fr_ulb_exo_verse.mp3",
+    "languageCode": "fr",
+    "dublinCoreId": "ulb",
+    "projectId": "exo",
+    "mediaExtension": "",
+    "mediaQuality": "medium",
+    "grouping": "verse",
+    "expectedResult": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
+    "languageCode": "",
+    "dublinCoreId": "",
+    "projectId": "",
+    "mediaExtension": "",
+    "mediaQuality": "",
+    "grouping": "",
+    "expectedResult": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.gif",
+    "languageCode": "en",
+    "dublinCoreId": "ulb",
+    "projectId": "gen",
+    "mediaExtension": "mp3",
+    "mediaQuality": "low",
+    "grouping": "chunk",
+    "expectedResult": "IllegalArgumentException"
+  }
+]
