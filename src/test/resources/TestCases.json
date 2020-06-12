@@ -7,7 +7,8 @@
     "mediaExtension": "mp3",
     "mediaQuality": "hi",
     "grouping": "chunk",
-    "expectedResult": "en/ulb/gen/CONTENTS/tr/mp3/hi/chunk/en_ulb_gen_chunk.tr"
+    "expectedResult": "en/ulb/gen/CONTENTS/tr/mp3/hi/chunk/en_ulb_gen_chunk.tr",
+    "expectedException": ""
   },
   {
     "fileName": "/home/tony_and_dj/aa_ulb_gen_chunk.tr",
@@ -16,7 +17,8 @@
     "projectId": "gen",
     "mediaExtension": "mp3",
     "grouping": "chunk",
-    "expectedResult": "aa/ulb/gen/CONTENTS/tr/mp3/hi/chunk/aa_ulb_gen_chunk.tr"
+    "expectedResult": "aa/ulb/gen/CONTENTS/tr/mp3/hi/chunk/aa_ulb_gen_chunk.tr",
+    "expectedException": ""
   },
   {
     "fileName": "/home/tony_and_dj/en_ulb_gen_verse.mp3",
@@ -25,7 +27,8 @@
     "projectId": "gen",
     "mediaExtension": "",
     "grouping": "verse",
-    "expectedResult": "en/ulb/gen/CONTENTS/mp3/hi/verse/en_ulb_gen_verse.mp3"
+    "expectedResult": "en/ulb/gen/CONTENTS/mp3/hi/verse/en_ulb_gen_verse.mp3",
+    "expectedException": ""
   },
   {
     "fileName": "/home/tony_and_dj/en_ulb_chunk.mp3",
@@ -34,7 +37,8 @@
     "projectId": "",
     "mediaExtension": "",
     "grouping": "chunk",
-    "expectedResult": "en/ulb/CONTENTS/mp3/hi/chunk/en_ulb_chunk.mp3"
+    "expectedResult": "en/ulb/CONTENTS/mp3/hi/chunk/en_ulb_chunk.mp3",
+    "expectedException": ""
   },
   {
     "fileName": "/home/tony_and_dj/fr_ulb_gen_chapter.mp3",
@@ -44,7 +48,8 @@
     "mediaExtension": "",
     "mediaQuality": "low",
     "grouping": "chapter",
-    "expectedResult": "fr/ulb/gen/CONTENTS/mp3/low/chapter/fr_ulb_gen_chapter.mp3"
+    "expectedResult": "fr/ulb/gen/CONTENTS/mp3/low/chapter/fr_ulb_gen_chapter.mp3",
+    "expectedException": ""
   },
   {
     "fileName": "/home/tony_and_dj/ja_ulb_mrk_book.wav",
@@ -53,7 +58,8 @@
     "projectId": "mrk",
     "mediaExtension": "",
     "grouping": "book",
-    "expectedResult": "ja/ulb/mrk/CONTENTS/wav/book/ja_ulb_mrk_book.wav"
+    "expectedResult": "ja/ulb/mrk/CONTENTS/wav/book/ja_ulb_mrk_book.wav",
+    "expectedException": ""
   },
   {
     "fileName": "/home/tony_and_dj/vn_ulb_exo_chapter.jpg",
@@ -63,7 +69,8 @@
     "mediaExtension": "",
     "mediaQuality": "low",
     "grouping": "chapter",
-    "expectedResult": "vn/ulb/exo/CONTENTS/jpg/low/chapter/vn_ulb_exo_chapter.jpg"
+    "expectedResult": "vn/ulb/exo/CONTENTS/jpg/low/chapter/vn_ulb_exo_chapter.jpg",
+    "expectedException": ""
   },
   {
     "fileName": "/home/tony_and_dj/zh_yml_chapter.wav",
@@ -72,7 +79,8 @@
     "projectId": "",
     "mediaExtension": "",
     "grouping": "chapter",
-    "expectedResult": "zh/yml/CONTENTS/wav/chapter/zh_yml_chapter.wav"
+    "expectedResult": "zh/yml/CONTENTS/wav/chapter/zh_yml_chapter.wav",
+    "expectedException": ""
   },
   {
     "fileName": "/home/tony_and_dj/zh_yml_chunk.wav",
@@ -81,6 +89,70 @@
     "projectId": "",
     "mediaExtension": "",
     "grouping": "chunk",
-    "expectedResult": "zh/yml/CONTENTS/wav/chunk/zh_yml_chunk.wav"
+    "expectedResult": "zh/yml/CONTENTS/wav/chunk/zh_yml_chunk.wav",
+    "expectedException": ""
+  },
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
+    "languageCode": "en",
+    "resourceType": "ulb",
+    "projectId": "gen",
+    "mediaExtension": "",
+    "grouping": "",
+    "expectedResult": "",
+    "expectedException": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
+    "languageCode": "en",
+    "resourceType": "ulb",
+    "projectId": "gen",
+    "mediaExtension": "",
+    "mediaQuality": "low",
+    "grouping": "chnk",
+    "expectedResult": "",
+    "expectedException": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
+    "languageCode": "",
+    "resourceType": "ulb",
+    "projectId": "gen",
+    "mediaExtension": "",
+    "grouping": "chunk",
+    "expectedResult": "",
+    "expectedException": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/fr_ulb_exo_verse.mp3",
+    "languageCode": "fr",
+    "resourceType": "ulb",
+    "projectId": "exo",
+    "mediaExtension": "",
+    "mediaQuality": "medium",
+    "grouping": "verse",
+    "expectedResult": "",
+    "expectedException": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
+    "languageCode": "",
+    "resourceType": "",
+    "projectId": "",
+    "mediaExtension": "",
+    "grouping": "",
+    "expectedResult": "",
+    "expectedException": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.gif",
+    "languageCode": "en",
+    "resourceType": "ulb",
+    "projectId": "gen",
+    "mediaExtension": "mp3",
+    "mediaQuality": "low",
+    "grouping": "chunk",
+    "expectedResult": "",
+    "expectedException": "IllegalArgumentException"
   }
 ]

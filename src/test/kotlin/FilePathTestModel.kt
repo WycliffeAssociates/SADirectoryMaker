@@ -7,6 +7,7 @@ data class FilePathTestModel(
     val resourceType: String,
     val grouping: String,
     val expectedResult: String,
+    val expectedException: String,
     val projectId: String = "",
     val mediaExtension: String = "",
     val mediaQuality: String = "hi"
