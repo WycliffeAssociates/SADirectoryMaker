@@ -14,19 +14,32 @@ class FilePathGeneratorTest {
 
     @Test
     fun testPathCreation() {
-        val testModels: List<FilePathTestModel> = getTestModelsFromFile("./src/test/resources/TestCases.json")
+        val testModels: List<FilePathTestModel> = getTestModels()
 
         for (model in testModels) {
             if(model.expectedResult.isEmpty()) {
-                assertThrows<IllegalArgumentException> { FilePathGenerator.createPathFromFile(model.getFileUploadModel()) }
+                testPathCreationWithException(model)
             } else {
-                assertEquals(model.expectedResult, FilePathGenerator.createPathFromFile(model.getFileUploadModel()))
+                testPathCreationWithValidInput(model)
             }
         }
     }
 
-    private fun getTestModelsFromFile(filePath: String): List<FilePathTestModel> {
-        val jsonTestFile = File(filePath)
+    private fun testPathCreationWithException(testModel: FilePathTestModel) {
+        assertThrows<IllegalArgumentException> {
+            FilePathGenerator.createPathFromFile(testModel.getFileUploadModel())
+        }
+    }
+
+    private fun testPathCreationWithValidInput(testModel: FilePathTestModel) {
+        assertEquals(
+            testModel.expectedResult,
+            FilePathGenerator.createPathFromFile(testModel.getFileUploadModel())
+        )
+    }
+
+    private fun getTestModels(): List<FilePathTestModel> {
+        val jsonTestFile = File("./src/test/resources/TestCases.json")
         val mapper = jacksonObjectMapper()
 
         return mapper.readValue(jsonTestFile.readText())
