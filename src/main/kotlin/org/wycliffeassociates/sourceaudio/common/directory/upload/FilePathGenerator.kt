@@ -9,7 +9,7 @@ object FilePathGenerator {
     fun createPathFromFile(fileModel: FileUploadModel): String {
         val pathPrefix = getPathPrefix(
             fileModel.languageCode,
-            fileModel.dublinCoreId,
+            fileModel.resourceType,
             fileModel.projectId,
             fileModel.extension
         )
@@ -36,13 +36,13 @@ object FilePathGenerator {
 
     private fun getPathPrefix(
         languageCode: String,
-        dublinCoreId: String,
+        resourceType: String,
         projectId: String,
         inputFileExtension: String
     ): String {
         return when {
-            projectId.isBlank() -> "$languageCode/$dublinCoreId/CONTENTS/$inputFileExtension"
-            else -> "$languageCode/$dublinCoreId/${projectId}/CONTENTS/$inputFileExtension"
+            projectId.isBlank() -> "$languageCode/$resourceType/CONTENTS/$inputFileExtension"
+            else -> "$languageCode/$resourceType/${projectId}/CONTENTS/$inputFileExtension"
         }
     }
 }

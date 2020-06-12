@@ -2,7 +2,7 @@
   {
     "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.tr",
     "languageCode": "en",
-    "dublinCoreId": "ulb",
+    "resourceType": "ulb",
     "projectId": "gen",
     "mediaExtension": "mp3",
     "mediaQuality": "hi",
@@ -12,7 +12,7 @@
   {
     "fileName": "/home/tony_and_dj/aa_ulb_gen_chunk.tr",
     "languageCode": "aa",
-    "dublinCoreId": "ulb",
+    "resourceType": "ulb",
     "projectId": "gen",
     "mediaExtension": "mp3",
     "grouping": "chunk",
@@ -21,7 +21,7 @@
   {
     "fileName": "/home/tony_and_dj/en_ulb_gen_verse.mp3",
     "languageCode": "en",
-    "dublinCoreId": "ulb",
+    "resourceType": "ulb",
     "projectId": "gen",
     "mediaExtension": "",
     "grouping": "verse",
@@ -30,7 +30,7 @@
   {
     "fileName": "/home/tony_and_dj/en_ulb_chunk.mp3",
     "languageCode": "en",
-    "dublinCoreId": "ulb",
+    "resourceType": "ulb",
     "projectId": "",
     "mediaExtension": "",
     "grouping": "chunk",
@@ -39,7 +39,7 @@
   {
     "fileName": "/home/tony_and_dj/fr_ulb_gen_chapter.mp3",
     "languageCode": "fr",
-    "dublinCoreId": "ulb",
+    "resourceType": "ulb",
     "projectId": "gen",
     "mediaExtension": "",
     "mediaQuality": "low",
@@ -49,7 +49,7 @@
   {
     "fileName": "/home/tony_and_dj/ja_ulb_mrk_book.wav",
     "languageCode": "ja",
-    "dublinCoreId": "ulb",
+    "resourceType": "ulb",
     "projectId": "mrk",
     "mediaExtension": "",
     "grouping": "book",
@@ -58,7 +58,7 @@
   {
     "fileName": "/home/tony_and_dj/vn_ulb_exo_chapter.jpg",
     "languageCode": "vn",
-    "dublinCoreId": "ulb",
+    "resourceType": "ulb",
     "projectId": "exo",
     "mediaExtension": "",
     "mediaQuality": "low",
@@ -68,7 +68,7 @@
   {
     "fileName": "/home/tony_and_dj/zh_yml_chapter.wav",
     "languageCode": "zh",
-    "dublinCoreId": "yml",
+    "resourceType": "yml",
     "projectId": "",
     "mediaExtension": "",
     "grouping": "chapter",
@@ -77,7 +77,7 @@
   {
     "fileName": "/home/tony_and_dj/zh_yml_chunk.wav",
     "languageCode": "zh",
-    "dublinCoreId": "yml",
+    "resourceType": "yml",
     "projectId": "",
     "mediaExtension": "",
     "grouping": "chunk",

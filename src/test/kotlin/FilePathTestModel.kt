@@ -4,7 +4,7 @@ import java.io.File
 data class FilePathTestModel(
     val fileName: String,
     val languageCode: String,
-    val dublinCoreId: String,
+    val resourceType: String,
     val grouping: String,
     val expectedResult: String,
     val projectId: String = "",
@@ -14,6 +14,6 @@ data class FilePathTestModel(
     private val inputFile: File = File(fileName)
 
     fun getFileUploadModel(): FileUploadModel {
-        return FileUploadModel(inputFile, languageCode, dublinCoreId, grouping, projectId, mediaExtension, mediaQuality)
+        return FileUploadModel(inputFile, languageCode, resourceType, grouping, projectId, mediaExtension, mediaQuality)
     }
 }
