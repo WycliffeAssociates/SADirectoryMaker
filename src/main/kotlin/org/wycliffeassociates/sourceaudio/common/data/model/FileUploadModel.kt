@@ -10,7 +10,7 @@ data class FileUploadModel(
     val grouping: String,
     val projectId: String = "",
     val mediaExtension: String = "",
-    val mediaQuality: String = "hi"
+    var mediaQuality: String = ""
 ) {
 
     val extension: String = inputFile.extension
@@ -18,12 +18,13 @@ data class FileUploadModel(
 
     init {
         validate()
+        if(this.mediaQuality.isEmpty()) this.mediaQuality = "hi"
     }
 
     @Throws(IllegalArgumentException::class)
     private fun validate() {
         if (languageCode.isBlank()) { throw IllegalArgumentException("Language Code is empty") }
-        if (resourceType.isBlank()) { throw IllegalArgumentException("Resource Type is empty") }
+        if (resourceType.isBlank()) { throw IllegalArgumentException("Dublin Core ID is empty") }
         if (grouping.isBlank()) { throw IllegalArgumentException("Group is empty") }
         if (!Groupings.isSupported(grouping)) { throw IllegalArgumentException("Group is not supported") }
         if (!MediaQuality.isSupported(mediaQuality)) { throw IllegalArgumentException("Media Quality is invalid") }
@@ -38,10 +39,10 @@ data class FileUploadModel(
                 throw IllegalArgumentException("Media Extension is empty")
             }
             if (!CompressedExtensions.isSupported(mediaExtension) && !UncompressedExtensions.isSupported(mediaExtension)) {
-                throw IllegalArgumentException(".$mediaExtension is not supported")
+                throw IllegalArgumentException(".$mediaExtension file is not supported")
             }
         } else if (!CompressedExtensions.isSupported(fileExtension) && !UncompressedExtensions.isSupported(fileExtension)) {
-            throw IllegalArgumentException(".${fileExtension} file is not supported")
+            throw IllegalArgumentException(".$fileExtension file is not supported")
         }
     }
 }
