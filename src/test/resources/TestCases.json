@@ -93,6 +93,28 @@
     "expectedException": ""
   },
   {
+    "fileName": "/resources/vi_ulb_chunk.wav",
+    "languageCode": "vi",
+    "resourceType": "ulb",
+    "projectId": "gal",
+    "chapter": "3",
+    "mediaExtension": "",
+    "grouping": "chunk",
+    "expectedResult": "vi/ulb/gal/3/CONTENTS/wav/chunk/vi_ulb_chunk.wav",
+    "expectedException": ""
+  },
+  {
+    "fileName": "/resources/ja_ulb_chapter.wav",
+    "languageCode": "ja",
+    "resourceType": "ulb",
+    "projectId": "mat",
+    "chapter": "019",
+    "mediaExtension": "",
+    "grouping": "chapter",
+    "expectedResult": "ja/ulb/mat/19/CONTENTS/wav/chapter/ja_ulb_chapter.wav",
+    "expectedException": ""
+  },
+  {
     "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
     "languageCode": "en",
     "resourceType": "ulb",
@@ -152,6 +174,16 @@
     "mediaExtension": "mp3",
     "mediaQuality": "low",
     "grouping": "chunk",
+    "expectedResult": "",
+    "expectedException": "IllegalArgumentException"
+  },
+  {
+    "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
+    "languageCode": "en",
+    "resourceType": "ulb",
+    "projectId": "",
+    "chapter": "019",
+    "grouping": "chapter",
     "expectedResult": "",
     "expectedException": "IllegalArgumentException"
   }
