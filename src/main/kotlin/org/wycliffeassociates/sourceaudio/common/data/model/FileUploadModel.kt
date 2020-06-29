@@ -26,6 +26,10 @@ data class FileUploadModel(
         if (languageCode.isBlank()) { throw IllegalArgumentException("Language Code is empty") }
         if (resourceType.isBlank()) { throw IllegalArgumentException("Dublin Core ID is empty") }
         if (grouping.isBlank()) { throw IllegalArgumentException("Group is empty") }
+        if (!Groupings.isSupported(grouping)) { throw IllegalArgumentException("Group is not supported") }
+        if(this.mediaQuality.isEmpty()) this.mediaQuality = "hi"
+        if (!MediaQuality.isSupported(mediaQuality)) { throw IllegalArgumentException("Media Quality is invalid") }
+
         if (chapter.isNotEmpty()) {
             if (projectId.isBlank()) {
                 throw IllegalArgumentException("BookID is not specified")
@@ -36,9 +40,6 @@ data class FileUploadModel(
                 throw IllegalArgumentException("Chapter is invalid")
             }
         }
-        if (!Groupings.isSupported(grouping)) { throw IllegalArgumentException("Group is not supported") }
-        if(this.mediaQuality.isEmpty()) this.mediaQuality = "hi"
-        if (!MediaQuality.isSupported(mediaQuality)) { throw IllegalArgumentException("Media Quality is invalid") }
 
         validateExtensions(inputFile.extension, mediaExtension)
     }
