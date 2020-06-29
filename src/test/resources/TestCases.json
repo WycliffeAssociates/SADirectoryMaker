@@ -93,7 +93,6 @@
     "expectedException": ""
   },
   {
-<<<<<<< HEAD
     "fileName": "/resources/vi_ulb_chunk.wav",
     "languageCode": "vi",
     "resourceType": "ulb",
@@ -116,8 +115,6 @@
     "expectedException": ""
   },
   {
-=======
->>>>>>> dev
     "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
     "languageCode": "en",
     "resourceType": "ulb",
@@ -179,7 +176,6 @@
     "grouping": "chunk",
     "expectedResult": "",
     "expectedException": "IllegalArgumentException"
-<<<<<<< HEAD
   },
   {
     "fileName": "/home/tony_and_dj/en_ulb_gen_chunk.mp3",
@@ -190,7 +186,5 @@
     "grouping": "chapter",
     "expectedResult": "",
     "expectedException": "IllegalArgumentException"
-=======
->>>>>>> dev
   }
 ]
