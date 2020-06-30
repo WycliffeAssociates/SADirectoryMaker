@@ -24,7 +24,7 @@ data class FileUploadModel(
     @Throws(IllegalArgumentException::class)
     private fun validate() {
         if (languageCode.isBlank()) { throw IllegalArgumentException("Language Code is empty") }
-        if (resourceType.isBlank()) { throw IllegalArgumentException("Dublin Core ID is empty") }
+        if (resourceType.isBlank()) { throw IllegalArgumentException("Resource Type is empty") }
         if (grouping.isBlank()) { throw IllegalArgumentException("Group is empty") }
         if (!Groupings.isSupported(grouping)) { throw IllegalArgumentException("Group is not supported") }
         if(this.mediaQuality.isEmpty()) this.mediaQuality = "hi"
@@ -32,7 +32,7 @@ data class FileUploadModel(
 
         if (chapter.isNotEmpty()) {
             if (projectId.isBlank()) {
-                throw IllegalArgumentException("BookID is not specified")
+                throw IllegalArgumentException("BookId is not specified")
             }
             try {
                 chapter.toInt()
