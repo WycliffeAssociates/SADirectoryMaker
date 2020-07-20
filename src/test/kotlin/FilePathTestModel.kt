@@ -9,12 +9,13 @@ data class FilePathTestModel(
     val expectedResult: String,
     val expectedException: String,
     val projectId: String = "",
+    val chapter: String = "",
     val mediaExtension: String = "",
     val mediaQuality: String = "hi"
 ) {
     private val inputFile: File = File(fileName)
 
     fun getFileUploadModel(): FileUploadModel {
-        return FileUploadModel(inputFile, languageCode, resourceType, grouping, projectId, mediaExtension, mediaQuality)
+        return FileUploadModel(inputFile, languageCode, resourceType, grouping, projectId, chapter, mediaExtension, mediaQuality)
     }
 }

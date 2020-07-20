@@ -11,6 +11,7 @@ object FilePathGenerator {
             fileModel.languageCode,
             fileModel.resourceType,
             fileModel.projectId,
+            fileModel.chapter,
             fileModel.extension
         )
 
@@ -38,11 +39,14 @@ object FilePathGenerator {
         languageCode: String,
         resourceType: String,
         projectId: String,
+        chapter: String,
         inputFileExtension: String
     ): String {
         return when {
             projectId.isBlank() -> "$languageCode/$resourceType/CONTENTS/$inputFileExtension"
-            else -> "$languageCode/$resourceType/${projectId}/CONTENTS/$inputFileExtension"
+            chapter.isNotEmpty() ->
+                "$languageCode/$resourceType/$projectId/${chapter.toInt()}/CONTENTS/$inputFileExtension"
+            else -> "$languageCode/$resourceType/$projectId/CONTENTS/$inputFileExtension"
         }
     }
 }

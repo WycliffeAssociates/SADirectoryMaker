@@ -9,8 +9,9 @@ data class FileUploadModel(
     val resourceType: String,
     val grouping: String,
     val projectId: String = "",
+    val chapter: String = "",
     val mediaExtension: String = "",
-    val mediaQuality: String = "hi"
+    var mediaQuality: String = ""
 ) {
 
     val extension: String = inputFile.extension
@@ -26,7 +27,19 @@ data class FileUploadModel(
         if (resourceType.isBlank()) { throw IllegalArgumentException("Resource Type is empty") }
         if (grouping.isBlank()) { throw IllegalArgumentException("Group is empty") }
         if (!Groupings.isSupported(grouping)) { throw IllegalArgumentException("Group is not supported") }
+        if(this.mediaQuality.isEmpty()) this.mediaQuality = "hi"
         if (!MediaQuality.isSupported(mediaQuality)) { throw IllegalArgumentException("Media Quality is invalid") }
+
+        if (chapter.isNotEmpty()) {
+            if (projectId.isBlank()) {
+                throw IllegalArgumentException("BookId is not specified")
+            }
+            try {
+                chapter.toInt()
+            } catch (e: Exception) {
+                throw IllegalArgumentException("Chapter is invalid")
+            }
+        }
 
         validateExtensions(inputFile.extension, mediaExtension)
     }
@@ -38,10 +51,10 @@ data class FileUploadModel(
                 throw IllegalArgumentException("Media Extension is empty")
             }
             if (!CompressedExtensions.isSupported(mediaExtension) && !UncompressedExtensions.isSupported(mediaExtension)) {
-                throw IllegalArgumentException(".$mediaExtension is not supported")
+                throw IllegalArgumentException(".$mediaExtension file is not supported")
             }
         } else if (!CompressedExtensions.isSupported(fileExtension) && !UncompressedExtensions.isSupported(fileExtension)) {
-            throw IllegalArgumentException(".${fileExtension} file is not supported")
+            throw IllegalArgumentException(".$fileExtension file is not supported")
         }
     }
 }
